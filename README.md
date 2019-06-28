@@ -1,2 +1,77 @@
 # InstallerApplication
 Simulating Installer Applications based on component dependency parameters
+
+The application can run in Visual Studio or by opening exe of the application
+The sample inputs and output could be as per below -
+
+-- Sample Input --
+DEPEND TELNET TCPIP NETCARD
+DEPEND TCPIP NETCARD
+DEPEND DNS TCPIP NETCARD
+DEPEND BROWSER TCPIP HTML
+INSTALL NETCARD
+INSTALL TELNET
+INSTALL foo
+REMOVE NETCARD
+INSTALL BROWSER
+INSTALL DNS
+LIST
+REMOVE TELNET
+REMOVE NETCARD
+REMOVE DNS
+REMOVE NETCARD
+INSTALL NETCARD
+REMOVE TCPIP
+REMOVE BROWSER
+REMOVE TCPIP
+LIST
+END
+
+-- Output Generated --
+DEPEND TELNET TCPIP NETCARD
+DEPEND TCPIP NETCARD
+DEPEND DNS TCPIP NETCARD
+DEPEND BROWSER TCPIP HTML
+INSTALL NETCARD
+Installing NETCARD
+INSTALL TELNET
+Installing TCPIPInstalling TELNET
+INSTALL foo
+Installing foo
+REMOVE NETCARD
+NETCARD is still needed.
+INSTALL BROWSER
+Installing HTML
+Installing BROWSER
+INSTALL DNS
+Installing DNS
+LIST
+HTML
+BROWSER
+DNS
+NETCARD
+foo
+TCPIP
+TELNET
+REMOVE TELNET
+Removing TELNET
+REMOVE NETCARD
+NETCARD is still needed.
+REMOVE DNS
+Removing DNS
+REMOVE NETCARD
+NETCARD is still needed.
+INSTALL NETCARD
+NETCARD is already installed.
+REMOVE TCPIP
+TCPIP is still needed.
+REMOVE BROWSER
+Removing BROWSER
+Removing HTML
+Removing TCPIP
+REMOVE TCPIP
+TCPIP is not installed.
+LIST
+NETCARD
+foo
+END
